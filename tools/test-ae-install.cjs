@@ -8,7 +8,7 @@ const hasPS=process.platform==='win32';
 const powershell=process.platform==='win32'?'powershell.exe':'pwsh';
 function ps(source){const r=cp.spawnSync(powershell,['-NoProfile','-NonInteractive','-Command',source],{encoding:'utf8',windowsHide:true,maxBuffer:2*1024*1024});assert.equal(r.status,0,r.stdout+'\n'+r.stderr);return r.stdout;}
 function fixture(t){
-  const dir=fs.mkdtempSync(path.join(os.tmpdir(),'atalhos-ae-test-'));t.after(()=>fs.rmSync(dir,{recursive:true,force:true}));
+  const dir=fs.realpathSync.native(fs.mkdtempSync(path.join(os.tmpdir(),'atalhos-ae-test-')));t.after(()=>fs.rmSync(dir,{recursive:true,force:true}));
   const source=path.join(dir,"Pacote Pós & 100%"),app=path.join(dir,'Adobe After Effects 2027'),prefs=path.join(dir,'preferences'),backup=path.join(dir,'backups');
   fs.mkdirSync(path.join(app,'Support Files'),{recursive:true});fs.writeFileSync(path.join(app,'Support Files','AfterFX.exe'),'fixture only');
   fs.mkdirSync(path.join(source,'Atalhos AE-assets'),{recursive:true});

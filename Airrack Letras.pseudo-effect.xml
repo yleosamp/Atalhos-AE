@@ -1,0 +1,7 @@
+  <Effect matchname="Pseudo/Leoda Airrack Letras" name="Airrack Letras">
+    <Slider name="Força" default="0.4" valid_min="0" valid_max="10" slider_min="0" slider_max="2" precision="2" />
+    <Slider name="Velocidade" default="1" valid_min="0" valid_max="20" slider_min="0" slider_max="5" precision="2" />
+    <Slider name="Rotação" default="1.6" valid_min="0" valid_max="20" slider_min="0" slider_max="5" precision="2" />
+    <Slider name="Escala" default="1" valid_min="0" valid_max="20" slider_min="0" slider_max="5" precision="2" />
+    <Slider name="Seed" default="1" valid_min="0" valid_max="9999" slider_min="0" slider_max="100" precision="2" />
+  </Effect>

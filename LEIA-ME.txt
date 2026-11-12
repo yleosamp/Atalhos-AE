@@ -1,0 +1,41 @@
+ATALHOS AE 1.0.0 — instalação rápida
+https://tools.yleoeditor.com/#atalhos-ae
+
+1. Extraia o ZIP inteiro. Não abra os arquivos ainda dentro do ZIP.
+2. Salve seu projeto e feche o After Effects.
+3. Windows: dê dois cliques em INSTALAR.bat.
+   macOS: botão direito em INSTALAR.command > Abrir.
+4. Confirme apenas a autorização de instalação solicitada pelo sistema.
+5. Abra o After: Janela > Atalhos AE. Arraste o painel para encaixar.
+
+Não precisa instalar Node, Python, Homebrew ou Adobe Developer Tools.
+No Mac, o instalador não é notarizado: o sistema pode pedir autorização para
+este arquivo em Privacidade e Segurança. Não desative o Gatekeeper/SIP.
+
+TECLA N (configurar uma única vez)
+Editar > Atalhos do teclado > procure "zz Atalhos AE - NULL" > atribua N.
+Remova o N de "Definir fim da área de trabalho" e salve seu conjunto.
+Nenhum arquivo de atalhos é alterado automaticamente pelo instalador.
+
+NULL sozinho: cria um nulo independente.
+Com um nulo selecionado: cria um novo filho dele, mantendo 2D/3D.
+O nulo novo fica selecionado para continuar criando a cadeia.
+
+DEPENDÊNCIAS OPCIONAIS
+NULL, câmera, adjustment e easing não precisam de plugins externos.
+Os botões Holograma e 3D experimental precisam do seu Deep Glow 2 instalado.
+Plugins, fontes e recursos comerciais não estão incluídos neste download.
+O movimento de letras usa sliders nativos se o controle agrupado não existir;
+o instalador não modifica o PresetEffects.xml global do After.
+
+É um script JSX, não um CCX. Atribuir N é uma configuração do próprio After.
+Versão comunitária; Mac/After devem ser compatíveis com seu hardware.
+Faça backup e confira o primeiro uso no seu After.
+
+ENGLISH
+Extract the entire ZIP, save/close After Effects, run INSTALAR.bat (Windows)
+or right-click INSTALAR.command > Open (macOS), then Window > Atalhos AE.
+No extra developer tools or runtimes. Assign N once in AE Keyboard Shortcuts
+to "zz Atalhos AE - NULL", removing its original work-area shortcut.
+Deep Glow 2 is required only for the hologram/experimental 3D buttons and is
+not included. Unsigned Mac installers may require per-file Open Anyway.

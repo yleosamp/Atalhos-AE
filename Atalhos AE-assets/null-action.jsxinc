@@ -14,8 +14,10 @@
 
     function run() {
         var comp = app.project && app.project.activeItem;
-        var parent;
-        var anchor;
+        var child;
+        var previousParent;
+        var pivot;
+        var transform;
         var layer;
         var i;
         if (!comp || !(comp instanceof CompItem)) {
@@ -24,24 +26,32 @@
         }
         // Capture the actual Layer object before addNull changes indices and
         // selection. Names are not identities: a renamed null still works.
-        parent = selectedNull(comp);
-        app.beginUndoGroup(parent ? "Criar nulo filho" : "Criar nulo");
+        child = selectedNull(comp);
+        if (child && child.locked) {
+            alert("Desbloqueie o nulo selecionado antes de criar o controlador.", "Atalhos AE");
+            return null;
+        }
+        app.beginUndoGroup(child ? "Criar nulo controlador" : "Criar nulo");
         try {
+            if (child) {
+                previousParent = child.parent;
+                pivot = child.property("ADBE Transform Group").property("ADBE Position").valueAtTime(comp.time, false);
+            }
             layer = comp.layers.addNull(comp.duration);
             layer.name = "Null";
-            if (parent) {
-                layer.threeDLayer = parent.threeDLayer;
-                // No compensation on the new default transforms: inherit the
-                // parent's rotation/scale. Do not reparent/move the old null.
-                layer.setParentWithJump(parent);
-                anchor = parent.property("ADBE Transform Group").property("ADBE Anchor Point");
-                anchor = anchor.valueAtTime(comp.time, false);
-                // Child position is in parent's local coordinates. Matching
-                // its anchor aligns the two pivots, including a custom anchor.
-                layer.property("ADBE Transform Group").property("ADBE Position").setValue(
-                    layer.threeDLayer ? [anchor[0], anchor[1], anchor.length > 2 ? anchor[2] : 0] : [anchor[0], anchor[1]]
-                );
-                layer.moveBefore(parent);
+            if (child) {
+                layer.threeDLayer = child.threeDLayer;
+                if (previousParent) layer.setParentWithJump(previousParent);
+                pivot = layer.threeDLayer ? [pivot[0], pivot[1], pivot.length > 2 ? pivot[2] : 0] : [pivot[0], pivot[1]];
+                transform = layer.property("ADBE Transform Group");
+                // A fresh null has rotation/orientation zero and scale 100.
+                // Position == Anchor yields an identity local matrix. Insert
+                // it into the old hierarchy without rewriting the old keys.
+                // The controller's pivot remains at the selected null's pivot.
+                transform.property("ADBE Anchor Point").setValue(pivot);
+                transform.property("ADBE Position").setValue(pivot);
+                layer.moveBefore(child);
+                child.setParentWithJump(layer);
             } else {
                 layer.property("ADBE Transform Group").property("ADBE Position").setValue([comp.width / 2, comp.height / 2]);
             }

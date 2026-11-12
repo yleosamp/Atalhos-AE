@@ -1,4 +1,4 @@
-ATALHOS AE 1.0.0 — instalação rápida
+ATALHOS AE 1.0.1 — instalação rápida
 https://tools.yleoeditor.com/#atalhos-ae
 
 1. Extraia o ZIP inteiro. Não abra os arquivos ainda dentro do ZIP.
@@ -18,8 +18,11 @@ Remova o N de "Definir fim da área de trabalho" e salve seu conjunto.
 Nenhum arquivo de atalhos é alterado automaticamente pelo instalador.
 
 NULL sozinho: cria um nulo independente.
-Com um nulo selecionado: cria um novo filho dele, mantendo 2D/3D.
+Com um nulo selecionado: o NOVO será o PAI; o ANTIGO fica ligado ao NOVO.
+Mantém 2D/3D e insere o controlador entre o antigo e seu pai anterior.
 O nulo novo fica selecionado para continuar criando a cadeia.
+O novo controlador é neutro: não reescreve os keyframes do nulo antigo.
+Expressões que dependem de parent/index podem ser afetadas pela hierarquia.
 
 DEPENDÊNCIAS OPCIONAIS
 NULL, câmera, adjustment e easing não precisam de plugins externos.

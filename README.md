@@ -1,13 +1,13 @@
 # Atalhos AE
 
-Painel dockável e responsivo para Adobe After Effects 2026/2027. Versão pública **1.0.0**, com pacotes Windows e macOS, sem Node, Homebrew ou ferramentas de desenvolvimento para o usuário. Ele troca automaticamente entre uma fileira horizontal e uma coluna vertical conforme o espaço onde estiver encaixado.
+Painel dockável e responsivo para Adobe After Effects 2026/2027. Versão pública **1.0.1**, com pacotes Windows e macOS, sem Node, Homebrew ou ferramentas de desenvolvimento para o usuário. Ele troca automaticamente entre uma fileira horizontal e uma coluna vertical conforme o espaço onde estiver encaixado.
 
 [Baixar no Yleo Tools](https://tools.yleoeditor.com/#atalhos-ae) · [Releases e instaladores](https://github.com/yleosamp/Atalhos-AE/releases/latest)
 
 ## Botoes
 
 1. **Camera 50mm** - cria uma camera 50 mm, um nulo 3D centralizado e liga a camera ao nulo.
-2. **NULL / Nulo** - cria um nulo 2D centralizado. Se houver um nulo selecionado, cria um novo nulo **filho do selecionado**, com o mesmo modo 2D/3D e o pivô alinhado. Não altera a posição, os keyframes nem o pai do nulo antigo. O novo fica selecionado, então novos cliques criam uma cadeia de nulos. Se vários nulos estiverem selecionados, usa o mais acima na timeline; outras camadas não viram pais.
+2. **NULL / Nulo** - cria um nulo 2D centralizado. Se houver um nulo selecionado, o **NOVO vira PAI, e o ANTIGO fica ligado ao NOVO**. Mantém o modo 2D/3D e insere o controlador entre o nulo antigo e seu pai anterior, sem reescrever os valores/keyframes antigos. O novo fica selecionado, então novos cliques criam controladores acima da cadeia. Se vários nulos estiverem selecionados, usa o mais acima na timeline; outras camadas não são alteradas.
 3. **Adjustment Layer** - cria uma camada de ajuste do tamanho da composicao.
 4. **Copiar easing** - guarda velocidade, influencia e interpolacao dos keyframes selecionados.
 5. **Colar easing** - aplica o easing guardado aos keyframes selecionados.
@@ -24,7 +24,7 @@ Se varios keyframes forem copiados, o painel preserva a sequencia. Ao colar em u
 
 ## Instalar no Windows
 
-1. Baixe **Atalhos-AE-1.0.0-Windows.zip** e extraia o ZIP inteiro.
+1. Baixe **Atalhos-AE-1.0.1-Windows.zip** e extraia o ZIP inteiro.
 2. Salve seu trabalho, feche o After Effects e dê dois cliques em `INSTALAR.bat`. Confirme a autorização do Windows se solicitada.
 3. Aguarde o instalador, que localiza a instalação do After. Abra o After novamente.
 4. Use **Janela > Atalhos AE** e encaixe o painel onde quiser.
@@ -43,7 +43,7 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1 -AfterEffectsVersion 26.0
 
 ## Instalar no macOS
 
-1. Baixe **Atalhos-AE-1.0.0-macOS.zip** e extraia tudo.
+1. Baixe **Atalhos-AE-1.0.1-macOS.zip** e extraia tudo.
 2. Salve seu trabalho e feche o After.
 3. Botão direito em **INSTALAR.command > Abrir**; siga a escolha de instalação se solicitada. Confirme a autorização de cópia para a pasta do After quando necessária.
 4. Abra o After > **Janela > Atalhos AE**. O comando de NULL também fica em **Arquivo > Scripts**.
@@ -71,7 +71,9 @@ Uma vez após instalar/reiniciar:
 1. Abra **Editar > Atalhos do teclado** (no Mac, use o editor de atalhos do After).
 2. Busque **`zz Atalhos AE - NULL`**, em **Aplicativo > Arquivo > Scripts**, e atribua **N**.
 3. Remova o **N** do comando original **Definir fim da área de trabalho**, inclusive se aparecer na categoria da timeline. Atalhos de painel podem ter prioridade sobre os do aplicativo.
-4. Salve seu conjunto personalizado. Na timeline, N sem seleção cria um nulo; com um nulo selecionado cria um filho dele.
+4. Salve seu conjunto personalizado. Na timeline, N sem seleção de nulo cria um nulo independente; com um nulo selecionado cria um **novo pai** para ele. O vínculo do comando N não muda ao atualizar da versão 1.0.0.
+
+O controlador novo é neutro (posição igual à âncora, escala 100 e rotação zero), preservando a transformação local e a animação comum do antigo. Seu pivô fica no pivô atual do nulo selecionado, mas o quadrado visual do nulo pode aparecer na origem do pai anterior. Expressões que dependem de `parent`/`index` podem mudar de significado pela própria mudança da hierarquia; não há promessa de preservação universal dessas expressões.
 
 Não há tentativa de capturar N globalmente pelo ScriptUI nem alteração automática dos seus atalhos. A atribuição precisa ser feita no editor nativo. Enquanto estiver digitando/renomeando um texto, N continua sendo texto. O prefixo `zz` evita inserir o comando antes dos scripts existentes. O AE pode limitar os scripts atribuíveis aos primeiros 20; se já houver muitos, será necessário organizar os scripts de menu. Confira seus atalhos se instalar/remover scripts que alterem a ordem dessa lista.
 

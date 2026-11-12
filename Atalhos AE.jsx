@@ -1325,7 +1325,7 @@
             id: "null",
             icon: "null.png",
             fallback: "NULL",
-            tooltip: "NULL: criar nulo. Com um nulo selecionado, cria um filho dele. Atalho N pelo comando zz Atalhos AE - NULL",
+            tooltip: "NULL: criar nulo. Com um nulo selecionado, cria um NOVO PAI para ele. Atalho N pelo comando zz Atalhos AE - NULL",
             run: createNull
         },
         {
